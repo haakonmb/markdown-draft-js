@@ -290,8 +290,10 @@ function markdownToDraft(string, options = {}) {
         }
       }
 
-      if (block) {
-        previousBlockEndingLine = item.lines[1];
+      if (block && item.lines) {
+        if (item.lines) {
+          previousBlockEndingLine = item.lines[1];
+        }
         blocks.push(block);
       }
     }
