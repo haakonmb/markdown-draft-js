@@ -1,12 +1,12 @@
 {
-  "name": "markdown-draft-js",
+  "name": "@haakonmb/markdown-draft-js",
   "description": "Convert draftjs blocks to markdown using the marked library, and vice versa.",
   "author": "Rose Robertson",
   "version": "2.2.1",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Rosey/markdown-draft-js.git"
+    "url": "https://github.com/haakonmb/markdown-draft-js.git"
   },
   "main": "lib/index.js",
   "module": "esm/index.js",
