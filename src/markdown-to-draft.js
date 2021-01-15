@@ -267,9 +267,12 @@ function markdownToDraft(string, options = {}) {
       // If there’s nested block level items deeper than that, we need to make sure we capture this by cloning the topmost block
       // otherwise we’ll accidentally overwrite its text. (eg if there's a blockquote with 3 nested paragraphs with inline text, without this check, only the last paragraph would be reflected)
       if (item.level === 0 || item.type === 'list_item_open') {
-        block = Object.assign({
-          depth: depth
-        }, BlockTypes[itemType](item));
+        block = Object.assign(
+          {
+            depth: depth
+          },
+          BlockTypes[itemType](item, blocks, parsedArray)
+        );
       } else if (item.level > 0 && blocks[blocks.length - 1].text) {
         block = Object.assign({}, blocks[blocks.length - 1]);
       }
