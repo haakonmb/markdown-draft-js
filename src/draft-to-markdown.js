@@ -464,12 +464,24 @@ function renderBlock(block, index, rawDraftObject, options) {
   }
 
   // Determine how many newlines to add - generally we want 2, but for list items we just want one when they are succeeded by another list item.
-  if (SingleNewlineAfterBlock.indexOf(type) !== -1 && rawDraftObject.blocks[index + 1] && SingleNewlineAfterBlock.indexOf(rawDraftObject.blocks[index + 1].type) !== -1) {
+  if (
+    SingleNewlineAfterBlock.indexOf(type) !== -1 &&
+    rawDraftObject.blocks[index + 1] &&
+    SingleNewlineAfterBlock.indexOf(rawDraftObject.blocks[index + 1].type) !==
+      -1
+  ) {
     markdownString += '\n';
-  } else if (rawDraftObject.blocks[index + 1] && type!=="table") {
+  } else if (
+    rawDraftObject.blocks[index + 1] &&
+    rawDraftObject.blocks[index + 1].type !== 'table'
+  ) {
     if (rawDraftObject.blocks[index].text) {
-      if (SingleNewlineAfterBlock.indexOf(type) !== -1
-          && SingleNewlineAfterBlock.indexOf(rawDraftObject.blocks[index + 1].type) === -1) {
+      if (
+        SingleNewlineAfterBlock.indexOf(type) !== -1 &&
+        SingleNewlineAfterBlock.indexOf(
+          rawDraftObject.blocks[index + 1].type
+        ) === -1
+      ) {
         markdownString += '\n\n';
       } else if (!options.preserveNewlines) {
         // 2 newlines if not preserving
@@ -477,7 +489,7 @@ function renderBlock(block, index, rawDraftObject, options) {
       } else {
         markdownString += '\n';
       }
-    } else if (options.preserveNewlines && type!=="table") {
+    } else if (options.preserveNewlines) {
       markdownString += '\n';
     }
   }
