@@ -226,11 +226,23 @@ function markdownToDraft(string, options = {}) {
   var previousBlockEndingLine = 0;
 
   // Allow user to define custom BlockTypes and Entities if they so wish
-  const BlockTypes = Object.assign({}, DefaultBlockTypes, options.blockTypes || {});
-  const BlockEntities = Object.assign({}, DefaultBlockEntities, options.blockEntities || {});
-  const BlockStyles = Object.assign({}, DefaultBlockStyles, options.blockStyles || {});
+  const BlockTypes = Object.assign(
+    {},
+    DefaultBlockTypes,
+    options.blockTypes || {}
+  );
+  const BlockEntities = Object.assign(
+    {},
+    DefaultBlockEntities,
+    options.blockEntities || {}
+  );
+  const BlockStyles = Object.assign(
+    {},
+    DefaultBlockStyles,
+    options.blockStyles || {}
+  );
 
-  parsedData.forEach(function (item) {
+  parsedData.forEach(function (item, index, parsedArray) {
     // Because of how remarkable's data is formatted, we need to cache what kind of list we're currently dealing with
     if (item.type === 'bullet_list_open') {
       currentListType = 'unordered_list_item_open';
