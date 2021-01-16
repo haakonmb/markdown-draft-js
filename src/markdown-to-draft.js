@@ -271,7 +271,7 @@ function markdownToDraft(string, options = {}) {
           {
             depth: depth
           },
-          BlockTypes[itemType](item, blocks, parsedArray)
+          BlockTypes[itemType](item, index, parsedArray, blocks)
         );
       } else if (item.level > 0 && blocks[blocks.length - 1].text) {
         block = Object.assign({}, blocks[blocks.length - 1]);
