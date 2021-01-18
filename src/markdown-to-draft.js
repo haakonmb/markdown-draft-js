@@ -278,7 +278,12 @@ function markdownToDraft(string, options = {}) {
       // List items will always be at least `level==1` though so we need a separate check for that
       // If there’s nested block level items deeper than that, we need to make sure we capture this by cloning the topmost block
       // otherwise we’ll accidentally overwrite its text. (eg if there's a blockquote with 3 nested paragraphs with inline text, without this check, only the last paragraph would be reflected)
-      if (item.level === 0 || item.type === 'list_item_open') {
+      if (
+        item.level === 0 ||
+        item.type === 'list_item_open' ||
+        (Array.isArray(options.levelExceptions) &&
+          options.levelExceptions.includes(item.type))
+      ) {
         block = Object.assign(
           {
             depth: depth
