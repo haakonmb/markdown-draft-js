@@ -307,7 +307,7 @@ function markdownToDraft(string, options = {}) {
         }
       }
 
-      if (block && item.lines) {
+      if (block) {
         if (item.lines) {
           previousBlockEndingLine = item.lines[1];
         }
