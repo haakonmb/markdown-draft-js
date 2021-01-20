@@ -38,7 +38,7 @@ const StyleItems = {
   },
 
   'ordered-list-item': {
-    open: function (block, number = 1) {
+    open: function (block, _, __, number = 1) {
       return `${number}. `;
     },
 
@@ -237,7 +237,12 @@ function renderBlock(block, index, rawDraftObject, options) {
 
     if (type === 'ordered-list-item') {
       orderedListNumber[block.depth] = orderedListNumber[block.depth] || 1;
-      markdownString += (customStyleItems[type] || StyleItems[type]).open(block, orderedListNumber[block.depth]);
+      markdownString += (customStyleItems[type] || StyleItems[type]).open(
+        block,
+        index,
+        rawDraftObject,
+        orderedListNumber[block.depth]
+      );
       orderedListNumber[block.depth]++;
 
       // Have to reset the number for orderedListNumber if we are breaking out of a list so that if
@@ -250,7 +255,11 @@ function renderBlock(block, index, rawDraftObject, options) {
       previousOrderedListDepth = block.depth;
     } else {
       orderedListNumber = {};
-      markdownString += (customStyleItems[type] || StyleItems[type]).open(block);
+      markdownString += (customStyleItems[type] || StyleItems[type]).open(
+        block,
+        index,
+        rawDraftObject
+      );
     }
   } else {
     orderedListNumber = {};
